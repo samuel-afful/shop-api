@@ -1,61 +1,62 @@
-const Cart = require('../models/Cart')
+const {verifyToken} = require("../middleware/verifywebtoken");
+const {verifyAdmin} = require('../middleware/admin')
 const router = require("express").Router();
-const verifyToken = require('../middleware/verifywebtoken')
+const Cart = require('../models/Cart');
 
 router.post('/cart',[verifyToken], async(req,res)=>{
-    const newCart = Cart(req.body);
+    const newCart = new Cart(req.body);
 
     try{
-       const savedProduct = await newCart.save()
-       res.status(200).json(savedProduct)
+       const savedCart = await newCart.save()
+       res.status(200).json(savedCart)
     }catch(err){
         res.status(500).json(err.message)
     }
    
     
-})
+});
+
 router.put('/:id',[verifyToken], async(req,res)=>{
-      try {
-        const updatedCart = await Cart.findByIdAndUpdate(req.params.id,{
-            $set:req.body,
-        },
-        {new:true}
-        )
-        res.status(200).json(updatedCart);
-    }catch(err){
-        res.status(500).json(err);
-    }
+    try {
+      const updatedCart = await Cart.findByIdAndUpdate(req.params.id,{
+          $set:req.body,
+      },
+      {new:true}
+      )
+      res.status(200).json(updatedCart);
+  }catch(err){
+      res.status(500).json(err);
+  }
 
 });
+
 
 router.delete('/:id',[verifyToken] ,async(req,res)=>{
 
-try{
-     await Cart.findByIdAndDelete(req.params.id);
-     res.status(200).json("Product Deleted");
-}catch(err){
-    res.status(500).json(err);
-}
-});
-
-router.get('/:userId',[verifyToken],async(res,req)=>{
-   try{ 
-    const cart = await Cart.findOne({userId:req.params.userId})
-    res.status(200).json(cart)
+    try{
+         await Cart.findByIdAndDelete(req.params.id);
+         res.status(200).json("Product Deleted");
     }catch(err){
         res.status(500).json(err);
     }
-});
+ });
 
-router.get('/',[verifyToken,verifyAdmin],async(res,req)=>{
-    try{ 
-     const carts = await Cart.find();
+ router.get('/find/:userId',[verifyToken],async(req,res)=>{
+   try{ const cart = await Cart.findOne({userId:req.params.userId});
+    res.status(200).json(cart)
+    }catch(err){
+        res.status(501).json(err)
+    }
+ });
+
+ router.get('/',[verifyToken,verifyAdmin],async(req,res)=>{
+    try{
+         const carts = await Cart.find();
      res.status(200).json(carts)
      }catch(err){
-         res.status(500).json(err);
+         res.status(501).json(err.message)
      }
- });
+  });
  
-
 
 module.exports = router;

@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express()
 const mongoose = require("mongoose");
+const testRouter = require("./routes/stripe");
+const cartRouter = require("./routes/cart");
+const orderRouter = require("./routes/order");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
 const prodRouter = require('./routes/product');
-const cartRouter = require('./routes/cart');
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -23,8 +26,9 @@ console.log("DB connected")
 app.use('/api/user',userRouter)
 app.use('/api/auth',authRouter)
 app.use('/api/product',prodRouter)
-app.use('api/cart',cartRouter)
-
+app.use('/api/cart',cartRouter)
+app.use('/api/order',orderRouter)
+app.use('/api/test',testRouter)
 
 port = process.env.PORT || 5000
 

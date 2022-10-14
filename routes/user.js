@@ -70,6 +70,7 @@ router.get("/stats", [verifyToken,verifyAdmin],async (req,res)=>{
                 }
             }
         ]);
+        console.log("  hello")
         res.status(200).json(data)
     }catch(err){
         res.status(500).json(err)
