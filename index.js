@@ -7,7 +7,7 @@ const orderRouter = require("./routes/order");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
 const prodRouter = require('./routes/product');
-
+const stripeRouter = require("./routes/stripe")
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -28,7 +28,7 @@ app.use('/api/auth',authRouter)
 app.use('/api/product',prodRouter)
 app.use('/api/cart',cartRouter)
 app.use('/api/order',orderRouter)
-app.use('/api/test',testRouter)
+app.use('/api/stripe',stripeRouter)
 
 port = process.env.PORT || 5000
 
