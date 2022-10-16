@@ -12,7 +12,7 @@ const prodRouter = require('./routes/product');
 const stripeRouter = require("./routes/stripe");
 const dotenv = require("dotenv");
 const path = require('path'); 
-dotenv.config({ path: path.resolve(__dirname, './.env') });
+dotenv.config({ path: path.resolve(__dirname, '/.env') });
 
 app.use(express.json());
 app.use(compression());
