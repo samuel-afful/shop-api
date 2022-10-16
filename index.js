@@ -11,7 +11,8 @@ const authRouter = require("./routes/auth");
 const prodRouter = require('./routes/product');
 const stripeRouter = require("./routes/stripe");
 const dotenv = require("dotenv");
-dotenv.config();
+const path = require('path'); 
+dotenv.config({ path: path.resolve(__dirname, './.env') });
 
 app.use(express.json());
 app.use(compression());
