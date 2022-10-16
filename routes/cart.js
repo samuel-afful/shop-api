@@ -52,6 +52,7 @@ router.delete('/:id',[verifyToken] ,async(req,res)=>{
  router.get('/',[verifyToken,verifyAdmin],async(req,res)=>{
     try{
          const carts = await Cart.find();
+         console.log(carts);
      res.status(200).json(carts)
      }catch(err){
          res.status(501).json(err.message)
