@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 var compression = require('compression');
+const config = require("config")
 var helmet = require("helmet");
-
+const _env = app.get('env')
 const cartRouter = require("./routes/cart");
 const orderRouter = require("./routes/order");
 const userRouter = require("./routes/user");
@@ -19,7 +20,7 @@ app.use(compression());
 app.use(helmet());
 
 
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(config.get("MONGO_URL"))
 .then(()=>{
 console.log("DB connected");
 }).catch((err)=>{
@@ -37,5 +38,6 @@ app.use('/api/stripe',stripeRouter);
 port = process.env.PORT || 5000;
 
 app.listen(port,()=>{
+    console.log(_env)
     console.log(`Listen on port ${port}`);
 });

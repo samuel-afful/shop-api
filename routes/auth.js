@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const User = require("../models/User")
 const CryptoJS = require('crypto-js')
-
+const config = require("config")
 
 //REGISTER
 router.post("/register", async(req,res)=>{
     const newUser = User({
         username:req.body.username,
         email:req.body.email,
-        password: CryptoJS.AES.encrypt(req.body.password,process.env.SECRET_KEY).toString()
+        password: CryptoJS.AES.encrypt(config.get("SECRET_KEY")).toString()
     });
     try{
         const savedUser =  await newUser.save();
@@ -29,7 +29,7 @@ router.post('/login',async(req,res)=>{
     if(!user) return res.status(201).json("Wrong Credentials");
     //takes the user password from database from matched username
     //Decrypting password and matching with plain password input
-    const hashedPassword  = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
+    const hashedPassword  = CryptoJS.AES.decrypt(user.password, config.get("SECRET_KEY"));
     const originalpassword = hashedPassword.toString(CryptoJS.enc.Utf8);
     if (originalpassword !== req.body.password ) return res.status(201).json("Wrong Credentials");   
        const token = user.generateAuthToken();

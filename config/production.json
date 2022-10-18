@@ -1,0 +1,8 @@
+{
+    "password":"app_password",
+    "MONGO_URL":"mongodb+srv://samuel:ttcwhar6a@cluster0.v7jbs.mongodb.net/?retryWrites=true&w=majority",
+    "SECRET_KEY":"TTCWHAR6A6@DJFM",
+    "TOKEN_KEY":"TTCWHAR6A6@DJFM",
+    "STRIPE_SECRET_KEY":"sk_test_51LsiKjDAMPRtgKpSKIVVeskxEFosXxwk60sPNKhXaZOec4gAcyu8dXRn6LQP6aXEQjumDRgami22hewP7Hbg7dQv007RRSCQpB"
+
+}
