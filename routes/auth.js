@@ -5,10 +5,10 @@ const config = require("config")
 
 //REGISTER
 router.post("/register", async(req,res)=>{
-    const user = await User.findOne({username:req.body.username})
-    if(user){
-        return res.status(201).json("username already exist")
-    }
+    const user = await User.findOne({username:req.body.username});
+    const email = await User.findOne({email:req.body.email})
+    if(email) { return res.status(201).json("email already exist")}
+    else if(user)  {return res.status(201).json("username already exist")}
     const newUser = User({
         username:req.body.username,
         email:req.body.email,
