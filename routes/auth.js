@@ -13,8 +13,11 @@ router.post("/register", async(req,res)=>{
     try{
         const savedUser =  await newUser.save();
         res.status(200).json(savedUser);
+        
         const token = savedUser.generateAuthToken()
+        
         res.status(200).json(token);
+        res.status(200).json("OK");
        
     }catch(err){
       // var error =  err.keyValue.email || err.keyValue.username ;
