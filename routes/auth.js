@@ -12,9 +12,10 @@ router.post("/register", async(req,res)=>{
     });
     try{
         const savedUser =  await newUser.save();
-        const token = savedUser.generateAuthToken()
-        res.header('x-auth-token',token).status(201).json(savedUser);
         res.send(savedUser)
+        // const token = savedUser.generateAuthToken()
+        // res.header('x-auth-token',token).status(201).json(savedUser);
+       
     }catch(err){
       // var error =  err.keyValue.email || err.keyValue.username ;
         res.status(201).json( err );
