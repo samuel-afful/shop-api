@@ -19,8 +19,8 @@ router.post("/register", async(req,res)=>{
         const token = savedUser.generateAuthToken()
         res.setHeader('x-auth-token',token).status(201).json(savedUser);
     }catch(err){
-        var error =  err.keyValue.email || err.keyValue.username ;
-        res.status(201).json( err + ' already exists');
+        
+        res.status(201).json( err );
     }
    
 });
