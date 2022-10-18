@@ -1,6 +1,6 @@
 {
     "password":"app_password",
-    "MONGO_URL":"mongodb+srv://samuel:ttcwhar6a@cluster0.v7jbs.mongodb.net/?retryWrites=true&w=majority",
+    "MONGO_URL":"mongo_url",
     "SECRET_KEY":"secret_key",
     "TOKEN_KEY":"token_key",
     "STRIPE_SECRET_KEY":"stripe_secret_key"
