@@ -5,6 +5,10 @@ const config = require("config")
 
 //REGISTER
 router.post("/register", async(req,res)=>{
+    const user = await User.findOne({username:req.body.username})
+    if(user){
+        return res.status(201).json("username already exist")
+    }
     const newUser = User({
         username:req.body.username,
         email:req.body.email,
@@ -15,7 +19,7 @@ router.post("/register", async(req,res)=>{
         const token = savedUser.generateAuthToken()
         res.setHeader('x-auth-token',token).status(201).json(savedUser);
     }catch(err){
-      // var error =  err.keyValue.email || err.keyValue.username ;
+        var error =  err.keyValue.email || err.keyValue.username ;
         res.status(201).json( err + ' already exists');
     }
    
