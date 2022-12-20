@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+var cors = require('cors')
 const mongoose = require("mongoose");
 var compression = require('compression');
 const config = require("config")
@@ -18,9 +19,9 @@ dotenv.config({ path: path.resolve(__dirname, '/.env') });
 app.use(express.json());
 app.use(compression());
 app.use(helmet());
+app.use(cors())
 
-
-mongoose.connect(config.get("MONGO_URL"))
+mongoose.connect(config.get('MONGO_URL'))
 .then(()=>{
 console.log("DB connected");
 }).catch((err)=>{

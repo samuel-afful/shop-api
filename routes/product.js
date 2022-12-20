@@ -5,7 +5,7 @@ const Product = require('../models/Product');
 
 
 
-router.post('/products',[verifyToken,verifyAdmin], async(req,res)=>{
+router.post('/products', async(req,res)=>{
         const newProduct = new Product(req.body);
 
         try{

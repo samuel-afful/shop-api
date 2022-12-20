@@ -3,6 +3,7 @@ const {verifyToken} = require("../middleware/verifywebtoken")
 const {verifyAdmin} = require("../middleware/admin")
 const router = require("express").Router();
 const CryptoJS = require('crypto-js');
+const config = require("config")
 
 
 router.put("/:id",verifyToken,async(req,res)=>{
@@ -70,7 +71,6 @@ router.get("/stats", [verifyToken,verifyAdmin],async (req,res)=>{
                 }
             }
         ]);
-        console.log("  hello")
         res.status(200).json(data)
     }catch(err){
         res.status(500).json(err)
